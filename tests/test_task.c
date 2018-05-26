@@ -212,6 +212,61 @@ END_TEST
 
 START_TEST (test_any)
     {
+        //Test 0
+        const char s1[] = "a";
+        const char s2[] = "a";
+        int answer = 0;
+        int res = any(s1, s2);
+        ck_assert_int_eq(answer, res);
+
+        //Test 1
+        const char s3[] = "se";
+        const char s4[] = "e";
+        answer = 1;
+        res = any(s3, s4);
+        ck_assert_int_eq(answer, res);
+
+        //Test 2
+        const char s5[] = "blablabla";
+        const char s6[] = "kek";
+        answer = -1;
+        res = any(s5, s6);
+        ck_assert_int_eq(answer, res);
+
+        //Test 3
+        const char s7[] = "  ";
+        const char s8[] = " lol";
+        answer = 0;
+        res = any(s7, s8);
+        ck_assert_int_eq(answer, res);
+
+        //Test 4
+        const char s9[] = " stroka s probelami";
+        const char s10[] = " i eta stroka ";
+        answer = 0;
+        res = any(s9, s10);
+        ck_assert_int_eq(answer, res);
+
+        //Test 5
+        const char s11[] = "stroka s tabom\t";
+        const char s12[] = "\t";
+        answer = 14;
+        res = any(s11, s12);
+        ck_assert_int_eq(answer, res);
+
+        //Test 6
+        const char s13[] = "123";
+        const char s14[] = "321";
+        answer = 0;
+        res = any(s13, s14);
+        ck_assert_int_eq(answer, res);
+
+        //Test 7
+        const char s15[] = "'*4$";
+        const char s16[] = "\t$";
+        answer = 3;
+        res = any(s15, s16);
+        ck_assert_int_eq(answer, res);
 
     }
 END_TEST

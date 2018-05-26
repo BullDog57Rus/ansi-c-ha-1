@@ -4,6 +4,7 @@
 
 #include <math.h>
 #include "task.h"
+#include <string.h>
 
 #define TAB_SIZE 4
 /** The stub function
@@ -108,4 +109,15 @@ int htoi(const char s[]) {
         power++;
     }
     return res;
+}
+
+int any(const char s1[], const char s2[]){
+    for (int i = 0; i < strlen(s1); i++ ){
+        for (int j = 0; j < strlen(s2); j++ ){
+            if (s1[i] == s2[j]){
+                return i;
+            }
+        }
+    }
+    return -1;
 }
