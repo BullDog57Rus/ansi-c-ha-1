@@ -233,11 +233,65 @@ START_TEST (test_enter)
     {
         //Test 0
         const char s0[] = "qwertyuio";
-        int n = 3;
-        const char answer[] = "qwe\nrty\nyui\no";
+        int n0 = 3;
+        const char answer0[] = "qwe\nrty\nuio";
         int k =1;
-        char *output = enter(n, s0);
-        COMPARATOR(k, output, answer);
+        char *output0 = enter(n0, s0);
+        COMPARATOR(k, output0, answer0);
+        ck_assert(1==k);
+
+        //Test 1
+        const char s1[] = "dlinnay stroka";
+        int n1 = 4;
+        const char answer1[] = "dlin\nnay \nstro\nka";
+        k =1;
+        char *output1 = enter(n1, s1);
+        COMPARATOR(k, output1, answer1);
+        ck_assert(1==k);
+
+        //Test 2
+        const char s2[] = "1234567890987654321";
+        int n2 = 6;
+        const char answer2[] = "123456\n789098\n765432\n1";
+        k =1;
+        char *output2 = enter(n2, s2);
+        COMPARATOR(k, output2, answer2);
+        ck_assert(1==k);
+
+        //Test 3
+        const char s3[] = "Hello, world!!!!!!!!!!!!!!!!!!!";
+        int n3 = 6;
+        const char answer3[] = "Hello,\n world\n!!!!!!\n!!!!!!\n!!!!!!\n!";
+        k =1;
+        char *output3 = enter(n3, s3);
+        COMPARATOR(k, output3, answer3);
+        ck_assert(1==k);
+
+        //Test 4
+        const char s4[] = "\tLublu\ttabi\t";
+        int n4 = 3;
+        const char answer4[] = "\tLu\nblu\n\tta\nbi\t";
+        k =1;
+        char *output4 = enter(n4, s4);
+        COMPARATOR(k, output4, answer4);
+        ck_assert(1==k);
+
+        //Test 5
+        const char s5[] = "5 * 5 = 25";
+        int n5 = 2;
+        const char answer5[] = "5 \n* \n5 \n= \n25";
+        k =1;
+        char *output5 = enter(n5, s5);
+        COMPARATOR(k, output5, answer5);
+        ck_assert(1==k);
+
+        //Test 6
+        const char s6[] = "QwertAsdfgZxcvb";
+        int n6 = 5;
+        const char answer6[] = "Qwert\nAsdfg\nZxcvb";
+        k =1;
+        char *output6 = enter(n6, s6);
+        COMPARATOR(k, output6, answer6);
         ck_assert(1==k);
 
     }
@@ -402,7 +456,7 @@ START_TEST (test_any)
         //Test 5
         const char s6[] = "Stroka \t s \t tabami";
         const char t6[] = "\t";
-        answer = 12;
+        answer = 11;
         res = strrindex(s6, t6);
         ck_assert_int_eq(answer, res);
 
