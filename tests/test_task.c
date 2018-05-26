@@ -267,7 +267,6 @@ START_TEST (test_any)
         answer = 3;
         res = any(s15, s16);
         ck_assert_int_eq(answer, res);
-
     }
 END_TEST
 
