@@ -233,7 +233,47 @@ END_TEST
 
 START_TEST (test_htoi)
     {
+        //Test 0
+        char *s0 = "0x123";
+        int answer = 291;
+        int res = htoi(s0);
+        ck_assert_int_eq(answer, res);
 
+        //Test 1
+        char *s1 = "123";
+        answer = 291;
+        res = htoi(s1);
+        ck_assert_int_eq(answer, res);
+
+        //Test 2
+        char *s2 = "0";
+        answer = 0;
+        res = htoi(s2);
+        ck_assert_int_eq(answer, res);
+
+        //Test 3
+        char *s3 = "0xfA3";
+        answer = 4003;
+        res = htoi(s3);
+        ck_assert_int_eq(answer, res);
+
+        //Test 4
+        char *s4 = "0XaBcDeF";
+        answer = 11259375;
+        res = htoi(s4);
+        ck_assert_int_eq(answer, res);
+
+        //Test 5
+        char *s5 = "fFFf";
+        answer = 65535;
+        res = htoi(s5);
+        ck_assert_int_eq(answer, res);
+
+        //Test 6
+        char *s6 = "0x0";
+        answer = 0;
+        res = htoi(s6);
+        ck_assert_int_eq(answer, res);
     }
 END_TEST
 
