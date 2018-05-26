@@ -54,7 +54,7 @@ char *itoa(int n, const char s[]);
 
 char *itob(int n, const char s[], int b);
 
-int strrindex(const char s[], const char t[]);
+int strrindex(const char source[], const char target[]);
 
 double atofe(const char s[]);
 

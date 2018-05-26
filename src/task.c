@@ -170,3 +170,33 @@ int any(const char s1[], const char s2[]){
     }
     return -1;
 }
+
+int strrindex(const char source[], const char target[]) {
+    int s_len = strlen(source);
+    int t_len = strlen(target);
+    int index = -1;
+    for (int i = s_len - t_len + 1; i >= 0; i--) {
+        if (source[i] == target[0]) {
+            index = i;
+            break;
+        }
+    }
+
+    if (index > -1) {
+        for (int i = index; i < t_len + index; i++) {
+            char a = source[i];
+            char b = target[i - index];
+            if (a == b && i - index == t_len) return index;
+            if (a != b) {
+                char* to = (char*) malloc((index + 1) * sizeof(char));
+                for (int j = 0; j < index; j++) {
+                    to[j] = source[j];
+                }
+                to[index] = '\0';
+                return strrindex(to, target);
+            }
+        }
+        return index;
+    }
+    return index;
+}
