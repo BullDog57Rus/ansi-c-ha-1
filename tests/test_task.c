@@ -279,7 +279,68 @@ END_TEST
 
 START_TEST (test_squeeze)
     {
+        //Test 0
+        char *s0 = "abracadabra";
+        char *r0 = "abcd";
+        char *answer0 = "rr";
+        char *res0 = squeeze(s0, r0);
+        int k = 1;
+        COMPARATOR(k, answer0, res0);
+        ck_assert_int_eq(k, 1);
 
+        //Test 1
+        char *s1 = "I don't give a hack what I am doing";
+        char *r1 = " ";
+        char *answer1 = "Idon'tgiveahackwhatIamdoing";
+        char *res1 = squeeze(s1, r1);
+        k = 1;
+        COMPARATOR(k, answer1, res1);
+        ck_assert_int_eq(k, 1);
+
+        //Test 2
+        char *s2 = "dcba";
+        char *r2 = "abcd";
+        char *answer2 = "";
+        char *res2 = squeeze(s2, r2);
+        k = 1;
+        COMPARATOR(k, answer2, res2);
+        ck_assert_int_eq(k, 1);
+
+        //Test 3
+        char *s3 = "dbcA";
+        char *r3 = "abcd";
+        char *answer3 = "A";
+        char *res3 = squeeze(s3, r3);
+        k = 1;
+        COMPARATOR(k, answer3, res3);
+        ck_assert_int_eq(k, 1);
+
+        //Test 4
+        char *s4 = "MissIsSiPpi";
+        char *r4 = "sp";
+        char *answer4 = "MiISiPi";
+        char *res4 = squeeze(s4, r4);
+        k = 1;
+        COMPARATOR(k, answer4, res4);
+        ck_assert_int_eq(k, 1);
+
+        //Test 5
+        char *s5 = "Nichego ne pomenyalos'";
+        char *r5 = "";
+        char *answer5 = "Nichego ne pomenyalos'";
+        char *res5 = squeeze(s5, r5);
+        k = 1;
+        COMPARATOR(k, answer5, res5);
+        ck_assert_int_eq(k, 1);
+
+        //Test 6
+        char *s6 = "Udalyau zapyatie, ibo ne nuzhni";
+        char *r6 = ",";
+        char *answer6 = "Udalyau zapyatie ibo ne nuzhni";
+        char *res6 = squeeze(s6, r6);
+        k = 1;
+        COMPARATOR(k, answer6, res6);
+        ck_assert_int_eq(k, 1);
     }
 END_TEST
 
