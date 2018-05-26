@@ -33,12 +33,13 @@ int stub(void) {
  */
 
 char *array_changer(const char c[]) {
-    char i = 0, j = 0;
-    STRING_LEN(i, c);
-    char *b = ALLOCATE(i);
+    char j = 0;
+    int size = 0;
+    STRING_LEN(size, c);
+    char *b = ALLOCATE(size);
 
-    for (; j < i;) {
-        if (b[j] == 'c')
+    for (; j < size;) {
+        if (c[j] == 'c')
             b[j] = 'b';
         else
             b[j] = c[j];
@@ -50,7 +51,17 @@ char *array_changer(const char c[]) {
 /** YOUR SOLUTIONS */
 
 char *detab(const char input[]) {
-    /** YOUR CODE HERE */
+    /** JUST TO CHECK */
+    char *c = ALLOCATE(10);
+    return c;
+}
+
+char *entab(const char input[]) {
+    /** JUST TO CHECK */
+    char *c = ALLOCATE(10);
+    int size = 0;
+    STRING_LEN(size, input);
+    return c;
 }
 
 /** GET FROM task.h */
