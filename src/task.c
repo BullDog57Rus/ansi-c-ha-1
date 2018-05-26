@@ -152,6 +152,28 @@ char* flush(const char input[]) {
     return to;
 }
 
+char *enter(int n, const char input[]){
+    int length = strlen(input);
+    int count = 0;
+    char* output = ALLOCATE(length + log2(length) + 1);
+    if (length > n){
+        for(int i = 0; i < length; i++){
+            output[i+count] = input[i];
+            if (i % n == n-1 && i != 0 && i != length - 1){
+                output[i+count + 1] = '\n';
+                count++;
+            }
+        }
+    }
+    int bound = length + count + 1;
+    char* to = ALLOCATE(bound);
+    for (int j = 0; j < bound - 1; j++) {
+        to[j] = output[j];
+    }
+    to[bound - 1] = '\0';
+    return to;
+}
+
 /** GET FROM task.h */
 
 int htoi(const char s[]) {
