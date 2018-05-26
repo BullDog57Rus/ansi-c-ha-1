@@ -2,6 +2,7 @@
 // Created by cubazis on 25.05.18.
 //
 
+#include <math.h>
 #include "task.h"
 
 #define TAB_SIZE 4
@@ -85,3 +86,26 @@ char *entab(const char input[]) {
 }
 
 /** GET FROM task.h */
+
+int htoi(const char s[]) {
+    int l = 0;
+    int res = 0;
+    int start = 0;
+    STRING_LEN(l, s);
+    if (s[1] == 'x' || s[1] == 'X') {
+        start = 2;
+    }
+    int power = 0;
+    for (int i = l - 1; i >= start; i--) {
+        char j = s[i];
+        if ( j >= 'a' && j <= 'f') {
+            res += (j - 'a' + 10) * pow(16, power);
+        } else if (j >= 'A' && j <= 'F') {
+            res += (j - 'A' + 10) * pow(16, power);
+        } else if (j >= '0' && j <= '9') {
+            res += (j - '0') * pow(16, power);
+        }
+        power++;
+    }
+    return res;
+}
