@@ -7,6 +7,7 @@
 #include <string.h>
 
 #define TAB_SIZE 4
+
 /** The stub function
  *  just to demonstrate how to work with ck_assert
  *  please look for test case for stub function in test_task.c
@@ -58,17 +59,17 @@ char *detab(const char input[]) {
     int j = 0;
     STRING_LEN(i, input);
     char *to_return = ALLOCATE(i);
-    j=i;
-    int k2=0;
-    for (int k1 = 0; k1 < i ; ++k1) {
-        if(input[k1]=='\t'){
-            j=j+TAB_SIZE;
-            realloc(to_return, j*sizeof(char));
-            for (int c = 0; c < TAB_SIZE ; ++c) {
+    j = i;
+    int k2 = 0;
+    for (int k1 = 0; k1 < i; ++k1) {
+        if (input[k1] == '\t') {
+            j = j + TAB_SIZE;
+            realloc(to_return, j * sizeof(char));
+            for (int c = 0; c < TAB_SIZE; ++c) {
                 to_return[k2] = ' ';
                 k2++;
             }
-        } else{
+        } else {
             to_return[k2] = input[k1];
             k2++;
         }
@@ -79,11 +80,49 @@ char *detab(const char input[]) {
 }
 
 char *entab(const char input[]) {
-    /** JUST TO CHECK */
-    char *c = ALLOCATE(10);
-    int size = 0;
-    STRING_LEN(size, input);
-    return c;
+    char i = 0;
+    STRING_LEN(i, input);
+    char *to_return = ALLOCATE(i);
+    int j = i;
+
+    int k2 = 0;
+
+    int current_spaces = 0;
+
+    for (int k1 = 0; k1 < i; ++k1) {
+        if (input[k1] == ' ') {
+            if (current_spaces != 4) {
+                current_spaces++;
+            }
+            if (current_spaces == 4){
+                current_spaces = 0;
+                to_return[k2] = '\t';
+                k2++;
+            }
+        } else {
+            while (current_spaces > 0) {
+                to_return[k2] = ' ';
+                k2++;
+                current_spaces--;
+            }
+            to_return[k2] = input[k1];
+            k2++;
+        }
+    }
+
+//    while (current_spaces >= 4) {
+//        to_return[k2] = '\t';
+//        k2++;
+//        current_spaces = current_spaces - 4;
+//    }
+//    while (current_spaces > 0) {
+//        to_return[k2] = ' ';
+//        k2++;
+//        current_spaces--;
+//    }
+
+    to_return[k2] = '\0';
+    return to_return;
 }
 
 /** GET FROM task.h */

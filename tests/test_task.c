@@ -142,7 +142,80 @@ END_TEST
 
 START_TEST (test_entab)
     {
+        //Test 1
+        const char input1[] = "abc    ";
+        const char answer1[] = "abc\t";
 
+        int k = 1;
+        char *output1 = entab(input1);
+        COMPARATOR(k, output1, answer1);
+        ck_assert(1==k);
+
+        //Test 2
+        const char input2[] = "abc      ";
+        const char answer2[] = "abc\t  ";
+
+        k = 1;
+        char *output2 = entab(input2);
+        COMPARATOR(k, output2, answer2);
+        ck_assert(1==k);
+
+        //Test 3
+        const char input3[] = "abc            ";
+        const char answer3[] = "abc\t\t\t";
+
+        k = 1;
+        char *output3 = entab(input3);
+        COMPARATOR(k, output3, answer3);
+
+        ck_assert(1==k);
+
+        //Test 4
+        const char input4[] = "                        ";
+        const char answer4[] = "\t\t\t\t\t\t";
+
+        k = 1;
+        char *output4 = entab(input4);
+        COMPARATOR(k, output4, answer4);
+
+        //Test 5
+        const char input5[] = "";
+        const char answer5[] = "";
+
+        k = 1;
+        char *output5 = entab(input5);
+        COMPARATOR(k, output5, answer5);
+
+        ck_assert(1==k);
+
+        //Test 6
+        const char input6[] = "Wow  this sentece  have    difference  size    of   spaces.";
+        const char answer6[] = "Wow  this sentece  have\tdifference  size\tof   spaces.";
+
+        k = 1;
+        char *output6 = entab(input6);
+        COMPARATOR(k, output6, answer6);
+
+        ck_assert(1==k);
+
+        //Test 7
+        const char input7[] = "What\tabout\ttabs\there???";
+        const char answer7[] = "What\tabout\ttabs\there???";
+
+        k = 1;
+        char *output7 = entab(input7);
+        COMPARATOR(k, output7, answer7);
+
+        ck_assert(1==k);
+        //Test 8
+        const char input8[] = "So      Much   Spaces     Around        Here          .     ";
+        const char answer8[] = "So\t  Much   Spaces\t Around\t\tHere\t\t  .\t ";
+
+        k = 1;
+        char *output8 = entab(input8);
+        COMPARATOR(k, output8, answer8);
+
+        ck_assert(1==k);
     }
 END_TEST
 
