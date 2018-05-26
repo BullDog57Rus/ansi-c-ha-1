@@ -289,13 +289,128 @@ END_TEST
 
 START_TEST (test_squeeze)
     {
+        //Test 0
+        char *s0 = "abracadabra";
+        char *r0 = "abcd";
+        char *answer0 = "rr";
+        char *res0 = squeeze(s0, r0);
+        int k = 1;
+        COMPARATOR(k, answer0, res0);
+        ck_assert_int_eq(k, 1);
 
+        //Test 1
+        char *s1 = "I don't give a hack what I am doing";
+        char *r1 = " ";
+        char *answer1 = "Idon'tgiveahackwhatIamdoing";
+        char *res1 = squeeze(s1, r1);
+        k = 1;
+        COMPARATOR(k, answer1, res1);
+        ck_assert_int_eq(k, 1);
+
+        //Test 2
+        char *s2 = "dcba";
+        char *r2 = "abcd";
+        char *answer2 = "";
+        char *res2 = squeeze(s2, r2);
+        k = 1;
+        COMPARATOR(k, answer2, res2);
+        ck_assert_int_eq(k, 1);
+
+        //Test 3
+        char *s3 = "dbcA";
+        char *r3 = "abcd";
+        char *answer3 = "A";
+        char *res3 = squeeze(s3, r3);
+        k = 1;
+        COMPARATOR(k, answer3, res3);
+        ck_assert_int_eq(k, 1);
+
+        //Test 4
+        char *s4 = "MissIsSiPpi";
+        char *r4 = "sp";
+        char *answer4 = "MiISiPi";
+        char *res4 = squeeze(s4, r4);
+        k = 1;
+        COMPARATOR(k, answer4, res4);
+        ck_assert_int_eq(k, 1);
+
+        //Test 5
+        char *s5 = "Nichego ne pomenyalos'";
+        char *r5 = "";
+        char *answer5 = "Nichego ne pomenyalos'";
+        char *res5 = squeeze(s5, r5);
+        k = 1;
+        COMPARATOR(k, answer5, res5);
+        ck_assert_int_eq(k, 1);
+
+        //Test 6
+        char *s6 = "Udalyau zapyatie, ibo ne nuzhni";
+        char *r6 = ",";
+        char *answer6 = "Udalyau zapyatie ibo ne nuzhni";
+        char *res6 = squeeze(s6, r6);
+        k = 1;
+        COMPARATOR(k, answer6, res6);
+        ck_assert_int_eq(k, 1);
     }
 END_TEST
 
 START_TEST (test_any)
     {
+        //Test 0
+        const char s1[] = "a";
+        const char s2[] = "a";
+        int answer = 0;
+        int res = any(s1, s2);
+        ck_assert_int_eq(answer, res);
 
+        //Test 1
+        const char s3[] = "se";
+        const char s4[] = "e";
+        answer = 1;
+        res = any(s3, s4);
+        ck_assert_int_eq(answer, res);
+
+        //Test 2
+        const char s5[] = "blablabla";
+        const char s6[] = "kek";
+        answer = -1;
+        res = any(s5, s6);
+        ck_assert_int_eq(answer, res);
+
+        //Test 3
+        const char s7[] = "  ";
+        const char s8[] = " lol";
+        answer = 0;
+        res = any(s7, s8);
+        ck_assert_int_eq(answer, res);
+
+        //Test 4
+        const char s9[] = " stroka s probelami";
+        const char s10[] = " i eta stroka ";
+        answer = 0;
+        res = any(s9, s10);
+        ck_assert_int_eq(answer, res);
+
+        //Test 5
+        const char s11[] = "stroka s tabom\t";
+        const char s12[] = "\t";
+        answer = 14;
+        res = any(s11, s12);
+        ck_assert_int_eq(answer, res);
+
+        //Test 6
+        const char s13[] = "123";
+        const char s14[] = "321";
+        answer = 0;
+        res = any(s13, s14);
+        ck_assert_int_eq(answer, res);
+
+        //Test 7
+        const char s15[] = "'*4$";
+        const char s16[] = "\t$";
+        answer = 3;
+        res = any(s15, s16);
+        ck_assert_int_eq(answer, res);
     }
 END_TEST
 

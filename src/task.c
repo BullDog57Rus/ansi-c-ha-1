@@ -4,9 +4,9 @@
 
 #include <math.h>
 #include "task.h"
+#include <string.h>
 
 #define TAB_SIZE 4
-
 /** The stub function
  *  just to demonstrate how to work with ck_assert
  *  please look for test case for stub function in test_task.c
@@ -134,4 +134,39 @@ int htoi(const char s[]) {
         power++;
     }
     return res;
+}
+
+char *squeeze(const char s1[], const char s2[]) {
+    int l1 = 0, l2 = 0;
+    STRING_LEN(l1, s1);
+    STRING_LEN(l2, s2);
+    char *res = ALLOCATE(l1);
+    int flag;
+    int res_i = 0;
+    for (int i = 0; i < l1; i++) {
+        flag = 0;
+        for (int j = 0; j < l2; j++) {
+            if (s1[i] == s2[j]) {
+                flag = 1;
+                break;
+            }
+        }
+        if (!flag) {
+            res[res_i] = s1[i];
+            res_i++;
+        }
+    }
+    res[res_i] = '\0';
+    return res;
+}
+
+int any(const char s1[], const char s2[]){
+    for (int i = 0; i < strlen(s1); i++ ){
+        for (int j = 0; j < strlen(s2); j++ ){
+            if (s1[i] == s2[j]){
+                return i;
+            }
+        }
+    }
+    return -1;
 }
