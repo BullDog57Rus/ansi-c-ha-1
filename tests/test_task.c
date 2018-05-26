@@ -62,17 +62,81 @@ END_TEST
 
 START_TEST (test_detab)
     {
-        //Test 1
-        const char input[] = "abc\ta";
-        const char answer[] = "abc    a";
+        //Test 1 detab
+        const char input1[] = "abc\ta";
+        const char answer1[] = "abc    a";
 
         int k = 1;
-        char *output = detab(input);
-        COMPARATOR(k, output, answer);
+        char *output1 = detab(input1);
+        COMPARATOR(k, output1, answer1);
 
         ck_assert(1==k);
 
         //Test 2
+        const char input2[] = "abc\t\t\ta";
+        const char answer2[] = "abc            a";
+
+        k = 1;
+        char *output2 = detab(input2);
+        COMPARATOR(k, output2, answer2);
+
+        ck_assert(1==k);
+
+        //Test 3
+
+        const char input3[] = "";
+        const char answer3[] = "";
+
+        k = 1;
+        char *output3 = detab(input3);
+        COMPARATOR(k, output3, answer3);
+
+        ck_assert(1==k);
+
+        //Test 4
+
+
+        const char input4[] = "abc";
+        const char answer4[] = "abc";
+
+        k = 1;
+        char *output4 = detab(input4);
+        COMPARATOR(k, output4, answer4);
+
+        ck_assert(1==k);
+
+        //Test 5
+
+        const char input5[] = "\t\t\t\t\t\t";
+        const char answer5[] = "                        ";
+
+        k = 1;
+        char *output5 = detab(input5);
+        COMPARATOR(k, output5, answer5);
+
+        ck_assert(1==k);
+
+        //Test 6
+
+        const char input6[] = "I\tam\tvery\tbored\t";
+        const char answer6[] = "I    am    very    bored    ";
+
+        k = 1;
+        char *output6 = detab(input6);
+        COMPARATOR(k, output6, answer6);
+
+        ck_assert(1==k);
+
+        //Test 7
+
+        const char input7[] = "\tThis is very long sentence.\tIt contains four tabs.\tAnd this is very cool.\t";
+        const char answer7[] = "    This is very long sentence.    It contains four tabs.    And this is very cool.    ";
+
+        k = 1;
+        char *output7 = detab(input7);
+        COMPARATOR(k, output7, answer7);
+
+        ck_assert(1==k);
     }
 END_TEST
 
