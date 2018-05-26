@@ -58,7 +58,6 @@ char *detab(const char input[]) {
     char *to_return = ALLOCATE(i);
     j=i;
     int k2=0;
-
     for (int k1 = 0; k1 < i ; ++k1) {
         if(input[k1]=='\t'){
             j=j+TAB_SIZE;
@@ -72,6 +71,7 @@ char *detab(const char input[]) {
             k2++;
         }
     }
+    to_return[k2] = '\0';
 
     return to_return;
 }

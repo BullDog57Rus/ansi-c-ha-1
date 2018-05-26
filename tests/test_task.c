@@ -62,7 +62,17 @@ END_TEST
 
 START_TEST (test_detab)
     {
+        //Test 1
+        const char input[] = "abc\ta";
+        const char answer[] = "abc    a";
 
+        int k = 1;
+        char *output = detab(input);
+        COMPARATOR(k, output, answer);
+
+        ck_assert(1==k);
+
+        //Test 2
     }
 END_TEST
 
