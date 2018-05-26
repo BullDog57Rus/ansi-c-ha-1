@@ -91,7 +91,8 @@ char *entab(const char input[]) {
         if (input[k1] == ' ') {
             if (current_spaces != 4) {
                 current_spaces++;
-            } else {
+            }
+            if (current_spaces == 4){
                 current_spaces = 0;
                 to_return[k2] = '\t';
                 k2++;
@@ -107,16 +108,16 @@ char *entab(const char input[]) {
         }
     }
 
-    while (current_spaces >= 4) {
-        to_return[k2] = '\t';
-        k2++;
-        current_spaces = current_spaces - 4;
-    }
-    while (current_spaces > 0) {
-        to_return[k2] = ' ';
-        k2++;
-        current_spaces--;
-    }
+//    while (current_spaces >= 4) {
+//        to_return[k2] = '\t';
+//        k2++;
+//        current_spaces = current_spaces - 4;
+//    }
+//    while (current_spaces > 0) {
+//        to_return[k2] = ' ';
+//        k2++;
+//        current_spaces--;
+//    }
 
     to_return[k2] = '\0';
     return to_return;
