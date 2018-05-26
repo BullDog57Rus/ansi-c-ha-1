@@ -4,6 +4,7 @@
 
 #include "task.h"
 
+#define TAB_SIZE 4
 /** The stub function
  *  just to demonstrate how to work with ck_assert
  *  please look for test case for stub function in test_task.c
@@ -50,7 +51,28 @@ char *array_changer(const char c[]) {
 /** YOUR SOLUTIONS */
 
 char *detab(const char input[]) {
-    /** YOUR CODE HERE */
+    char i = 0;
+    int j = 0;
+    STRING_LEN(i, input);
+    char *to_return = ALLOCATE(i);
+    j=i;
+    int k2=0;
+
+    for (int k1 = 0; k1 < i ; ++k1) {
+        if(input[k1]=='\t'){
+            j=j+TAB_SIZE;
+            realloc(to_return, j*sizeof(char));
+            for (int c = 0; c < TAB_SIZE ; ++c) {
+                to_return[k2] = ' ';
+                k2++;
+            }
+        } else{
+            to_return[k2] = input[k1];
+            k2++;
+        }
+    }
+
+    return to_return;
 }
 
 /** GET FROM task.h */
