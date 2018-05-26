@@ -142,7 +142,15 @@ END_TEST
 
 START_TEST (test_entab)
     {
+        //Test 1 detab
+        const char input1[] = "abc    ";
+        const char answer1[] = "abc\t";
 
+        int k = 1;
+        char *output1 = entab(input1);
+        COMPARATOR(k, output1, answer1);
+        printf("%s, %s, %s,", input1, answer1, output1);
+        ck_assert(1==k);
     }
 END_TEST
 
