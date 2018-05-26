@@ -237,7 +237,29 @@ END_TEST
 
 START_TEST (test_flush)
     {
+        //Test 0
+        char* s0 = "// asdasdasd\nNext line for successful people//One more comment";
+        char* answer = "Next line for successful people";
+        char* res = flush(s0);
+        ck_assert_str_eq(answer, res);
 
+        //Test 1
+        s0 = "/// // asdasdasd\n/*Next line for */successful people//One more comment";
+        answer = "successful people";
+        res = flush(s0);
+        ck_assert_str_eq(answer, res);
+
+        //Test 2
+        s0 = "///**/func\n//";
+        answer = "";
+        res = flush(s0);
+        ck_assert_str_eq(answer, res);
+
+        //Test 3
+        s0 = "/**/func\n//comment\n/* asdasdasd \nasdasdasd\nasdasd*/yet another function";
+        answer = "func\nyet another function";
+        res = flush(s0);
+        ck_assert_str_eq(answer, res);
     }
 END_TEST
 

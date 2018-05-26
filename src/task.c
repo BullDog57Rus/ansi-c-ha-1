@@ -111,6 +111,47 @@ char *entab(const char input[]) {
     return to_return;
 }
 
+char* flush(const char input[]) {
+    char* output = ALLOCATE(strlen(input));
+    int pointer = 0;
+    for (int i = 0; i < strlen(input) - 1; i++) {
+        if (input[i] == '/') {
+            // Remove // comments until next line
+            if (input[i + 1] == '/') {
+                int curDels = 1;
+                for (int j = i + 2; j < strlen(input); j++) {
+                    curDels++;
+                    if (input[j] == '\n') {
+                        break;
+                    }
+                }
+                i += curDels;
+            }
+
+            // Remove /* ... */
+            else if (input[i + 1] == '*') {
+                int curDels = 0;
+                for (int j = i; j < strlen(input) - 1; j++) {
+                    curDels++;
+                    if (input[j] == '*' && input[j + 1] == '/') {
+                        break;
+                    }
+                }
+                i += curDels;
+            }
+        } else {
+            output[pointer] = input[i];
+            pointer++;
+        }
+    }
+    char* to = ALLOCATE(pointer + 1);
+    for (int j = 0; j <= pointer; j++) {
+        to[j] = output[j];
+    }
+    to[pointer] = '\0';
+    return to;
+}
+
 /** GET FROM task.h */
 
 int htoi(const char s[]) {
