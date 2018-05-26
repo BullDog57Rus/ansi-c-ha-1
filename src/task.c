@@ -9,9 +9,8 @@
  *  please look for test case for stub function in test_task.c
  */
 
-int stub(void)
-{
-	return 42;
+int stub(void) {
+    return 42;
 }
 
 /** The array_changer function
@@ -33,27 +32,25 @@ int stub(void)
  *  please look for test case for array_changer function in test_task.c
  */
 
-char* array_changer(const char c[])
-{
-	char i = 0, j = 0;
-	STRING_LEN(i, c);
-	char* b = ALLOCATE(i);
+char *array_changer(const char c[]) {
+    char i = 0, j = 0;
+    STRING_LEN(i, c);
+    char *b = ALLOCATE(i);
 
-	for (;j < i;) {
-		if(b[j] == 'c')
-			b[j] = 'b';
-		else
-			b[j] = c[j];
-		j++;
-	}
-	return b;
+    for (; j < i;) {
+        if (b[j] == 'c')
+            b[j] = 'b';
+        else
+            b[j] = c[j];
+        j++;
+    }
+    return b;
 }
 
 /** YOUR SOLUTIONS */
 
-char* detab(const char input[])
-{
-	/** YOUR CODE HERE */
+char *detab(const char input[]) {
+    /** YOUR CODE HERE */
 }
 
 /** GET FROM task.h */
