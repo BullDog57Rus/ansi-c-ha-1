@@ -90,10 +90,8 @@ char *entab(const char input[]) {
 
     for (int k1 = 0; k1 < i; ++k1) {
         if (input[k1] == ' ') {
-            if (current_spaces != 4) {
-                current_spaces++;
-            }
-            if (current_spaces == 4){
+            current_spaces++;
+            if (current_spaces == 4) {
                 current_spaces = 0;
                 to_return[k2] = '\t';
                 k2++;
@@ -108,17 +106,6 @@ char *entab(const char input[]) {
             k2++;
         }
     }
-
-//    while (current_spaces >= 4) {
-//        to_return[k2] = '\t';
-//        k2++;
-//        current_spaces = current_spaces - 4;
-//    }
-//    while (current_spaces > 0) {
-//        to_return[k2] = ' ';
-//        k2++;
-//        current_spaces--;
-//    }
 
     to_return[k2] = '\0';
     return to_return;
@@ -137,7 +124,7 @@ int htoi(const char s[]) {
     int power = 0;
     for (int i = l - 1; i >= start; i--) {
         char j = s[i];
-        if ( j >= 'a' && j <= 'f') {
+        if (j >= 'a' && j <= 'f') {
             res += (j - 'a' + 10) * pow(16, power);
         } else if (j >= 'A' && j <= 'F') {
             res += (j - 'A' + 10) * pow(16, power);

@@ -216,6 +216,16 @@ START_TEST (test_entab)
         COMPARATOR(k, output8, answer8);
 
         ck_assert(1==k);
+
+        //Test 9
+        const char input9[] = "     |     |      |     |";
+        const char answer9[] = "\t |\t |\t  |\t |";
+
+        k = 1;
+        char *output9 = entab(input9);
+        COMPARATOR(k, output9, answer9);
+
+        ck_assert(1==k);
     }
 END_TEST
 
