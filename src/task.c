@@ -399,3 +399,26 @@ char *escape(const char from[]) {
     to_return[k2] = '\0';
     return to_return;
 }
+
+char *expand(const char s1[]) {
+    int l = 0;
+    char *res = ALLOCATE(1);
+    int insert = 0;
+    STRING_LEN(l, s1);
+    for (int i = 1; i < l - 1; i++) {
+        if (s1[i] == '-') {
+            char start = s1[i - 1];
+            char end = s1[i + 1];
+            while (s1[i = i + 2] == '-' && i < l - 1) {
+                end = s1[i + 1];
+            }
+            for (char j = start; j <= end; j++) {
+                res[insert] = j;
+                insert++;
+                res = realloc(res, insert + 1 + sizeof(char));
+            }
+        }
+    }
+    res[insert] = '\0';
+    return res;
+}

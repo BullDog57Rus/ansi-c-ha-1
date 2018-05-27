@@ -583,7 +583,45 @@ END_TEST
 
 START_TEST (test_expand)
     {
+        //Test 0
+        char s0[] = "a-d";
+        char answer0[] = "abcd";
+        char *res0 = expand(s0);
+        int k = 1;
+        COMPARATOR(k, answer0, res0);
+        ck_assert_int_eq(k, 1);
 
+        //Test 1
+        char s1[] = "a-d0-9";
+        char answer1[] = "abcd0123456789";
+        char *res1 = expand(s1);
+        k = 1;
+        COMPARATOR(k, answer1, res1);
+        ck_assert_int_eq(k, 1);
+
+        //Test 2
+        char s2[] = "-a-d";
+        char answer2[] = "abcd";
+        char *res2 = expand(s2);
+        k = 1;
+        COMPARATOR(k, answer2, res2);
+        ck_assert_int_eq(k, 1);
+
+        //Test 3
+        char s3[] = "-a-d-";
+        char answer3[] = "abcd";
+        char *res3 = expand(s3);
+        k = 1;
+        COMPARATOR(k, answer3, res3);
+        ck_assert_int_eq(k, 1);
+
+        //Test 4
+        char s4[] = "a-d-e";
+        char answer4[] = "abcde";
+        char *res4 = expand(s4);
+        k = 1;
+        COMPARATOR(k, answer4, res4);
+        ck_assert_int_eq(k, 1);
     }
 END_TEST
 
