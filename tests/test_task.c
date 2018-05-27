@@ -733,7 +733,23 @@ END_TEST
 
 START_TEST (test_itoa)
     {
+        //Test 0
+        int x = 123;
+        char *res0 = itoa(x);
+        char *answer0 = "123";
+        ck_assert_str_eq(res0, answer0);
 
+        //Test 1
+        x = -2147483648;
+        char *res1 = itoa(x);
+        char *answer1 = "-2147483648";
+        ck_assert_str_eq(res1, answer1);
+
+        //Test 2
+        x = -2000000000;
+        char *res2 = itoa(x);
+        char *answer2 = "-2000000000";
+        ck_assert_str_eq(res2, answer2);
     }
 END_TEST
 

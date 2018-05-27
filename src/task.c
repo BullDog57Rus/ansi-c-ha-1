@@ -431,7 +431,7 @@ char *expand(const char s1[]) {
 
 unsigned setbits(unsigned x, int p, int n, unsigned y) {
     unsigned x1 = x;
-    int to_move = p+1-n;
+    int to_move = p + 1 - n;
 
     if (to_move < 0) {
         printf("ALERT ALERT ALERT WRONG INPUT\n");
@@ -547,6 +547,33 @@ double atofe(const char s[]) {
         } else {
             res += (s[0] - '0') * pow(10, powerL);
         }
+    }
+    return res;
+}
+
+char *itoa(int n) {
+    char *res = ALLOCATE(1);
+    int i, sign;
+    sign = n;
+
+    i = 0;
+    do {
+        res[i++] = (char) (abs(n % 10) + '0');
+        res = realloc(res, (i + 1) * sizeof(char));
+    } while (n /= 10);
+    if (sign < 0)
+        res[i++] = '-';
+
+    res[i] = '\0';
+
+    int j = 0;
+    STRING_LEN(j, res);
+    char c;
+
+    for (i = 0, j--; i < j; i++, j--) {
+        c = res[i];
+        res[i] = res[j];
+        res[j] = c;
     }
     return res;
 }
