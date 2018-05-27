@@ -111,6 +111,69 @@ char *entab(const char input[]) {
     return to_return;
 }
 
+char* flush(const char input[]) {
+    char* output = ALLOCATE(strlen(input));
+    int pointer = 0;
+    for (int i = 0; i < strlen(input) - 1; i++) {
+        if (input[i] == '/') {
+            // Remove // comments until next line
+            if (input[i + 1] == '/') {
+                int curDels = 1;
+                for (int j = i + 2; j < strlen(input); j++) {
+                    curDels++;
+                    if (input[j] == '\n') {
+                        break;
+                    }
+                }
+                i += curDels;
+            }
+
+            // Remove /* ... */
+            else if (input[i + 1] == '*') {
+                int curDels = 0;
+                for (int j = i; j < strlen(input) - 1; j++) {
+                    curDels++;
+                    if (input[j] == '*' && input[j + 1] == '/') {
+                        break;
+                    }
+                }
+                i += curDels;
+            }
+        } else {
+            output[pointer] = input[i];
+            pointer++;
+        }
+    }
+    char* to = ALLOCATE(pointer + 1);
+    for (int j = 0; j <= pointer; j++) {
+        to[j] = output[j];
+    }
+    to[pointer] = '\0';
+    return to;
+}
+
+char *enter(int n, const char input[]){
+    int length = strlen(input);
+    int count = 0;
+    char* output = ALLOCATE(length + log2(length) + 1);
+    if (length > n){
+        for(int i = 0; i < length; i++){
+            output[i+count] = input[i];
+            if (i % n == n-1 && i != 0 && i != length - 1){
+                output[i+count + 1] = '\n';
+                count++;
+            }
+        }
+    }
+    int bound = length + count + 1;
+    char* to = ALLOCATE(bound);
+    for (int j = 0; j < bound - 1; j++) {
+        to[j] = output[j];
+    }
+    to[bound - 1] = '\0';
+    return to;
+}
+
 /** GET FROM task.h */
 
 int htoi(const char s[]) {
@@ -169,4 +232,34 @@ int any(const char s1[], const char s2[]){
         }
     }
     return -1;
+}
+
+int strrindex(const char source[], const char target[]) {
+    int s_len = strlen(source);
+    int t_len = strlen(target);
+    int index = -1;
+    for (int i = s_len - t_len + 1; i >= 0; i--) {
+        if (source[i] == target[0]) {
+            index = i;
+            break;
+        }
+    }
+
+    if (index > -1) {
+        for (int i = index; i < t_len + index; i++) {
+            char a = source[i];
+            char b = target[i - index];
+            if (a == b && i - index == t_len) return index;
+            if (a != b) {
+                char* to = (char*) malloc((index + 1) * sizeof(char));
+                for (int j = 0; j < index; j++) {
+                    to[j] = source[j];
+                }
+                to[index] = '\0';
+                return strrindex(to, target);
+            }
+        }
+        return index;
+    }
+    return index;
 }
