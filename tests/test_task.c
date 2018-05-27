@@ -505,7 +505,7 @@ START_TEST (test_setbits)
         //Test 1
         unsigned int x = 138;
         unsigned int y = 503;
-        int p = 3; //increase by 1 every p if index from 1
+        int p = 4;
         int n = 3;
         unsigned int answer = 158;
         unsigned res = setbits(x, p, n, y);
@@ -514,18 +514,73 @@ START_TEST (test_setbits)
         //Test 2
         x = 74;
         y = 503;
-        p = 3; //increase by 1 every p if index from 1
+        p = 3;
         n = 3;
         answer = 78;
         res = setbits(x, p, n, y);
         ck_assert_int_eq(answer, res);
 
         //Test 3
+        x = 14;
+        y = 42;
+        p = 2;
+        n = 0;
+        answer = 14;
+        res = setbits(x, p, n, y);
+        ck_assert_int_eq(answer, res);
+
+        //Test 4
+        x = 14;
+        y = 42;
+        p = 3;
+        n = 3;
+        answer = 4;
+        res = setbits(x, p, n, y);
+        ck_assert_int_eq(answer, res);
+
+        //Test 5
+        x = 13234;
+        y = 43222;
+        p = 3;
+        n = 0;
+        answer = x;
+        res = setbits(x, p, n, y);
+        ck_assert_int_eq(answer, res);
+
+        //Test 6
+        x = 14;
+        y = 42;
+        p = 2;
+        n = 3;
+        answer = 10;
+        res = setbits(x, p, n, y);
+        ck_assert_int_eq(answer, res);
+
+        //Test 7
         x = 74;
         y = 503;
-        p = 3; //increase by 1 every p if index from 1
-        n = 3;
-        answer = 78;
+        p = 3;
+        n = 4;
+        answer = 71;
+        res = setbits(x, p, n, y);
+        ck_assert_int_eq(answer, res);
+
+
+        //Test 8
+        x = 74;
+        y = 503;
+        p = 0;
+        n = 1;
+        answer = 75;
+        res = setbits(x, p, n, y);
+        ck_assert_int_eq(answer, res);
+
+        //Test 9
+        x = 503;
+        y = 74;
+        p = 8;
+        n = 9;
+        answer = 74;
         res = setbits(x, p, n, y);
         ck_assert_int_eq(answer, res);
     }

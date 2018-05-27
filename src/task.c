@@ -431,15 +431,15 @@ char *expand(const char s1[]) {
 
 unsigned setbits(unsigned x, int p, int n, unsigned y) {
     unsigned x1 = x;
-    unsigned length = (unsigned int) (ceil(log2(x)));
-    int to_move = length - p - n; //-1 more if from 1
+    int to_move = p+1-n;
 
     if (to_move < 0) {
-        printf("ALERT ALERT ALERT WRONG INPUT");
-
+        printf("ALERT ALERT ALERT WRONG INPUT\n");
+        return 0;
     }
     x1 = x1 & (~(~0 << to_move));
     x = x >> to_move;
+    x = x & ((~0 << n));
 
     y = y & (~(~0 << n));
     x = x | y;
