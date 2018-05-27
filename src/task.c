@@ -234,6 +234,39 @@ int any(const char s1[], const char s2[]){
     return -1;
 }
 
+char *itob(int n, int b){
+    if (b < 2 ){
+        return "Base must be > 1";
+    }
+    int i, j, sign;
+    char* output = ALLOCATE(100);
+    if((sign = n) < 0)
+        n = -n;
+    i = 0;
+    do {
+        j = n % b;
+        if (j < 10){
+            output[i++] = j+'0';
+        }
+        else{
+            output[i++] = j+'a'-10;
+        }
+    }while((n/=b)>0);
+
+    if(sign < 0)
+        output[i++]='-';
+    output[i]='\0';
+
+    //reverse
+    int c , k, l;
+    for (k = 0, l = strlen(output)-1; k < l; k++, l--) {
+        c = output[k];
+        output[k] = output[l];
+        output[l] = c;
+    }
+    return output;
+}
+
 int strrindex(const char source[], const char target[]) {
     int s_len = strlen(source);
     int t_len = strlen(target);
