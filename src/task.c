@@ -62,8 +62,8 @@ char *detab(const char input[]) {
     int k2 = 0;
     for (int k1 = 0; k1 < i; ++k1) {
         if (input[k1] == '\t') {
-            j = j + TAB_SIZE;
-            realloc(to_return, j * sizeof(char));
+            j += TAB_SIZE;
+            to_return = realloc(to_return, j * sizeof(char));
             for (int c = 0; c < TAB_SIZE; ++c) {
                 to_return[k2] = ' ';
                 k2++;
