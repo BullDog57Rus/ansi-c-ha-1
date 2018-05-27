@@ -328,7 +328,7 @@ START_TEST (test_flush)
         //Test 4
         //Test that comments in string is not deleted
         char s2[] = "//This is normal comment\nchar *bla = \"//however this is not a normal comment\"";
-        answer ="char *bla = \"//however this is not a normal comment\"";
+        answer = "char *bla = \"//however this is not a normal comment\"";
         res = flush(s2);
         ck_assert_str_eq(answer, res);
     }
@@ -502,7 +502,32 @@ END_TEST
 
 START_TEST (test_setbits)
     {
+        //Test 1
+        unsigned int x = 138;
+        unsigned int y = 503;
+        int p = 3; //increase by 1 every p if index from 1
+        int n = 3;
+        unsigned int answer = 158;
+        unsigned res = setbits(x, p, n, y);
+        ck_assert_int_eq(answer, res);
 
+        //Test 2
+        x = 74;
+        y = 503;
+        p = 3; //increase by 1 every p if index from 1
+        n = 3;
+        answer = 78;
+        res = setbits(x, p, n, y);
+        ck_assert_int_eq(answer, res);
+
+        //Test 3
+        x = 74;
+        y = 503;
+        p = 3; //increase by 1 every p if index from 1
+        n = 3;
+        answer = 78;
+        res = setbits(x, p, n, y);
+        ck_assert_int_eq(answer, res);
     }
 END_TEST
 
@@ -718,7 +743,6 @@ START_TEST (test_itob)
         k = 1;
         COMPARATOR(k, answer6, res6);
         ck_assert(1 == k);
-
 
     }
 END_TEST

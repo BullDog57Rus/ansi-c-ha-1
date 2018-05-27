@@ -324,72 +324,72 @@ char *escape(const char from[]) {
     k1 = k2 = 0;
 
     for (; k1 < i; ++k1) {
-        switch (from[k1]){
+        switch (from[k1]) {
             case '\t':
                 j += 2;
-                to_return = realloc(to_return, j*sizeof(char));
+                to_return = realloc(to_return, j * sizeof(char));
                 to_return[k2++] = '\\';
                 to_return[k2++] = 't';
                 break;
             case '\n':
                 j += 2;
-                to_return = realloc(to_return, j*sizeof(char));
+                to_return = realloc(to_return, j * sizeof(char));
                 to_return[k2++] = '\\';
                 to_return[k2++] = 'n';
                 break;
             case '\v':
                 j += 2;
-                to_return = realloc(to_return, j*sizeof(char));
-                to_return[k2++] =  '\\';
-                to_return[k2++] =  'v';
+                to_return = realloc(to_return, j * sizeof(char));
+                to_return[k2++] = '\\';
+                to_return[k2++] = 'v';
                 break;
             case '\b':
                 j += 2;
-                to_return = realloc(to_return, j*sizeof(char));
-                to_return[k2++] =  '\\';
-                to_return[k2++] =  'b';
+                to_return = realloc(to_return, j * sizeof(char));
+                to_return[k2++] = '\\';
+                to_return[k2++] = 'b';
                 break;
             case '\r':
                 j += 2;
-                to_return = realloc(to_return, j*sizeof(char));
-                to_return[k2++] =  '\\';
-                to_return[k2++] =  'r';
+                to_return = realloc(to_return, j * sizeof(char));
+                to_return[k2++] = '\\';
+                to_return[k2++] = 'r';
                 break;
             case '\f':
                 j += 2;
-                to_return = realloc(to_return, j*sizeof(char));
-                to_return[k2++] =  '\\';
-                to_return[k2++] =  'f';
+                to_return = realloc(to_return, j * sizeof(char));
+                to_return[k2++] = '\\';
+                to_return[k2++] = 'f';
                 break;
             case '\a':
                 j += 2;
-                to_return = realloc(to_return, j*sizeof(char));
-                to_return[k2++] =  '\\';
-                to_return[k2++] =  'a';
+                to_return = realloc(to_return, j * sizeof(char));
+                to_return[k2++] = '\\';
+                to_return[k2++] = 'a';
                 break;
             case '\\':
                 j += 2;
-                to_return = realloc(to_return, j*sizeof(char));
-                to_return[k2++] =  '\\';
-                to_return[k2++] =  '\\';
+                to_return = realloc(to_return, j * sizeof(char));
+                to_return[k2++] = '\\';
+                to_return[k2++] = '\\';
                 break;
             case '\?':
                 j += 2;
-                to_return = realloc(to_return, j*sizeof(char));
-                to_return[k2++] =  '\\';
-                to_return[k2++] =  '\?';
+                to_return = realloc(to_return, j * sizeof(char));
+                to_return[k2++] = '\\';
+                to_return[k2++] = '\?';
                 break;
             case '\'':
                 j += 2;
-                to_return = realloc(to_return, j*sizeof(char));
-                to_return[k2++] =  '\\';
-                to_return[k2++] =  '\'';
+                to_return = realloc(to_return, j * sizeof(char));
+                to_return[k2++] = '\\';
+                to_return[k2++] = '\'';
                 break;
             case '\"':
                 j += 2;
-                to_return = realloc(to_return, j*sizeof(char));
-                to_return[k2++] =  '\\';
-                to_return[k2++] =  '\"';
+                to_return = realloc(to_return, j * sizeof(char));
+                to_return[k2++] = '\\';
+                to_return[k2++] = '\"';
                 break;
             default:
                 to_return[k2++] = from[k1];
@@ -427,4 +427,25 @@ char *expand(const char s1[]) {
     }
     res[insert] = '\0';
     return res;
+}
+
+unsigned setbits(unsigned x, int p, int n, unsigned y) {
+    unsigned x1 = x;
+    unsigned length = (unsigned int) (ceil(log2(x)));
+    int to_move = length - p - n; //-1 more if from 1
+
+    if (to_move < 0) {
+        printf("ALERT ALERT ALERT WRONG INPUT");
+
+    }
+    x1 = x1 & (~(~0 << to_move));
+    x = x >> to_move;
+
+    y = y & (~(~0 << n));
+    x = x | y;
+
+    x = x << to_move;
+    x = x | x1;
+
+    return x;
 }
