@@ -449,3 +449,104 @@ unsigned setbits(unsigned x, int p, int n, unsigned y) {
 
     return x;
 }
+
+double atofe(const char s[]) {
+    int i = 0;
+    int l = 0;
+    STRING_LEN(l, s);
+    int flagPoint = 0;
+    int flagE = 0;
+    int E = 0;
+    double res = 0;
+    while (i < l) {
+        if (s[i] == '.') {
+            flagPoint = i;
+        }
+        if (s[i] == 'e' || s[i] == 'E') {
+            flagE = i;
+        }
+        i++;
+    }
+    if (flagPoint && flagE) {
+        int powerL = 0;
+        int goLeftPoint = flagPoint - 1;
+        while (goLeftPoint > 0) {
+            res += (s[goLeftPoint--] - '0') * pow(10, powerL++);
+        }
+        int goRightPoint = flagPoint + 1;
+        int powerR = -1;
+        while (goRightPoint < flagE) {
+            res += (s[goRightPoint++] - '0') * pow(10, powerR--);
+        }
+        if (s[0] == '-') {
+            res *= -1;
+        } else {
+            res += (s[0] - '0') * pow(10, powerL);
+        }
+        int startE = flagE + 1;
+        l--;
+        powerL = 0;
+        while (l > startE) {
+            E += (s[l] - '0') * pow(10, powerL);
+            l--;
+        }
+        if (s[startE] == '-') {
+            E *= -1;
+        } else {
+            E += (s[startE] - '0') * pow(10, powerL);
+        }
+        res *= pow(10, E);
+    } else if (flagPoint) {
+        int powerL = 0;
+        int goLeftPoint = flagPoint - 1;
+        while (goLeftPoint > 0) {
+            res += (s[goLeftPoint--] - '0') * pow(10, powerL++);
+        }
+        int goRightPoint = flagPoint + 1;
+        int powerR = -1;
+        while (goRightPoint < l) {
+            res += (s[goRightPoint++] - '0') * pow(10, powerR--);
+        }
+        if (s[0] == '-') {
+            res *= -1;
+        } else {
+            res += (s[0] - '0') * pow(10, powerL);
+        }
+    } else if (flagE) {
+        int powerL = 0;
+        int goLeftPoint = flagE - 1;
+        while (goLeftPoint > 0) {
+            res += (s[goLeftPoint--] - '0') * pow(10, powerL++);
+        }
+        if (s[0] == '-') {
+            res *= -1;
+        } else {
+            res += (s[0] - '0') * pow(10, powerL);
+        }
+        int startE = flagE + 1;
+        l--;
+        powerL = 0;
+        while (l > startE) {
+            E += (s[l] - '0') * pow(10, powerL);
+            l--;
+        }
+        if (s[startE] == '-') {
+            E *= -1;
+        } else {
+            E += (s[startE] - '0') * pow(10, powerL);
+        }
+        res *= pow(10, E);
+    } else {
+        int powerL = 0;
+        int goLeftPoint = l - 1;
+        while (goLeftPoint > 0) {
+            res += (s[goLeftPoint--] - '0') * pow(10, powerL++);
+        }
+        if (s[0] == '-') {
+            res *= -1;
+        } else {
+            res += (s[0] - '0') * pow(10, powerL);
+        }
+    }
+    return res;
+}
