@@ -7,6 +7,7 @@
 #include <string.h>
 
 #define TAB_SIZE 4
+
 /** The stub function
  *  just to demonstrate how to work with ck_assert
  *  please look for test case for stub function in test_task.c
@@ -110,8 +111,8 @@ char *entab(const char input[]) {
     return to_return;
 }
 
-char* flush(const char input[]) {
-    char* output = ALLOCATE(strlen(input));
+char *flush(const char input[]) {
+    char *output = ALLOCATE(strlen(input));
     int pointer = 0;
     for (int i = 0; i < strlen(input) - 1; i++) {
         if (input[i] == '/') {
@@ -127,7 +128,7 @@ char* flush(const char input[]) {
                 i += curDels;
             }
 
-            // Remove /* ... */
+                // Remove /* ... */
             else if (input[i + 1] == '*') {
                 int curDels = 0;
                 for (int j = i; j < strlen(input) - 1; j++) {
@@ -143,7 +144,7 @@ char* flush(const char input[]) {
             pointer++;
         }
     }
-    char* to = ALLOCATE(pointer + 1);
+    char *to = ALLOCATE(pointer + 1);
     for (int j = 0; j <= pointer; j++) {
         to[j] = output[j];
     }
@@ -151,21 +152,21 @@ char* flush(const char input[]) {
     return to;
 }
 
-char *enter(int n, const char input[]){
+char *enter(int n, const char input[]) {
     int length = strlen(input);
     int count = 0;
-    char* output = ALLOCATE(length + log2(length) + 1);
-    if (length > n){
-        for(int i = 0; i < length; i++){
-            output[i+count] = input[i];
-            if (i % n == n-1 && i != 0 && i != length - 1){
-                output[i+count + 1] = '\n';
+    char *output = ALLOCATE(length + log2(length) + 1);
+    if (length > n) {
+        for (int i = 0; i < length; i++) {
+            output[i + count] = input[i];
+            if (i % n == n - 1 && i != 0 && i != length - 1) {
+                output[i + count + 1] = '\n';
                 count++;
             }
         }
     }
     int bound = length + count + 1;
-    char* to = ALLOCATE(bound);
+    char *to = ALLOCATE(bound);
     for (int j = 0; j < bound - 1; j++) {
         to[j] = output[j];
     }
@@ -222,10 +223,10 @@ char *squeeze(const char s1[], const char s2[]) {
     return res;
 }
 
-int any(const char s1[], const char s2[]){
-    for (int i = 0; i < strlen(s1); i++ ){
-        for (int j = 0; j < strlen(s2); j++ ){
-            if (s1[i] == s2[j]){
+int any(const char s1[], const char s2[]) {
+    for (int i = 0; i < strlen(s1); i++) {
+        for (int j = 0; j < strlen(s2); j++) {
+            if (s1[i] == s2[j]) {
                 return i;
             }
         }
@@ -233,32 +234,31 @@ int any(const char s1[], const char s2[]){
     return -1;
 }
 
-char *itob(int n, int b){
-    if (b < 2 ){
+char *itob(int n, int b) {
+    if (b < 2) {
         return "Base must be > 1";
     }
     int i, j, sign;
-    char* output = ALLOCATE(100);
-    if((sign = n) < 0)
+    char *output = ALLOCATE(100);
+    if ((sign = n) < 0)
         n = -n;
     i = 0;
     do {
         j = n % b;
-        if (j < 10){
-            output[i++] = j+'0';
+        if (j < 10) {
+            output[i++] = j + '0';
+        } else {
+            output[i++] = j + 'a' - 10;
         }
-        else{
-            output[i++] = j+'a'-10;
-        }
-    }while((n/=b)>0);
+    } while ((n /= b) > 0);
 
-    if(sign < 0)
-        output[i++]='-';
-    output[i]='\0';
+    if (sign < 0)
+        output[i++] = '-';
+    output[i] = '\0';
 
     //reverse
-    int c , k, l;
-    for (k = 0, l = strlen(output)-1; k < l; k++, l--) {
+    int c, k, l;
+    for (k = 0, l = strlen(output) - 1; k < l; k++, l--) {
         c = output[k];
         output[k] = output[l];
         output[l] = c;
@@ -283,7 +283,7 @@ int strrindex(const char source[], const char target[]) {
             char b = target[i - index];
             if (a == b && i - index == t_len) return index;
             if (a != b) {
-                char* to = (char*) malloc((index + 1) * sizeof(char));
+                char *to = (char *) malloc((index + 1) * sizeof(char));
                 for (int j = 0; j < index; j++) {
                     to[j] = source[j];
                 }
@@ -312,4 +312,35 @@ int binsearch(int x, int v[], int n) {
     } else {
         return -1;
     }
+}
+
+char *escape(const char from[]) {
+    char i = 0;
+    int j = 0;
+    STRING_LEN(i, from);
+    char *to_return = ALLOCATE(i);
+    j = i;
+    int k2, k1;
+    k1 = k2 = 0;
+
+    for (; k1 < i; ++k1) {
+        switch (from[k1]){
+            case '\t':
+                j += 2;
+                to_return = realloc(to_return, j*sizeof(char));
+                to_return[k2++] = '\\';
+                to_return[k2++] = 't';
+                break;
+            case '\n':
+                j += 2;
+                to_return = realloc(to_return, j*sizeof(char));
+                to_return[k2++] = '\\';
+                to_return[k2++] = 'n';
+                break;
+            default:
+                to_return[k2++] = from[k1];
+        }
+    }
+    to_return[k2] = '\0';
+    return to_return;
 }

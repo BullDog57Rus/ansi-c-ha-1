@@ -538,7 +538,15 @@ END_TEST
 
 START_TEST (test_escape)
     {
+        //Test 1
+        const char input1[] = "abc\t";
+        const char answer1[] = "abc\\t";
 
+        int k = 1;
+        char *output1 = escape(input1);
+        COMPARATOR(k, output1, answer1);
+
+        ck_assert(1 == k);
     }
 END_TEST
 
