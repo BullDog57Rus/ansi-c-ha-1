@@ -405,6 +405,9 @@ char *expand(const char s1[]) {
     char *res = ALLOCATE(1);
     int insert = 0;
     STRING_LEN(l, s1);
+    if (s1[0] == '-') {
+        res[insert++] = '-';
+    }
     for (int i = 1; i < l - 1; i++) {
         if (s1[i] == '-') {
             char start = s1[i - 1];
@@ -418,6 +421,9 @@ char *expand(const char s1[]) {
                 res = realloc(res, insert + 1 + sizeof(char));
             }
         }
+    }
+    if (s1[l - 1] == '-') {
+        res[insert++] = '-';
     }
     res[insert] = '\0';
     return res;
