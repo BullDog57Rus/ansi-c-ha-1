@@ -8,7 +8,7 @@
 #ifndef COMPARATOR
 #define COMPARATOR(res, c1, c2) do                    \
     {                                             \
-        char i = 0;                           \
+        int i = 0;                           \
         for (;'\0' != (c1)[i];i++)            \
         {                                     \
             if((c1)[i] != (c2)[i])        \
@@ -547,6 +547,37 @@ START_TEST (test_escape)
         COMPARATOR(k, output1, answer1);
 
         ck_assert(1 == k);
+
+        //Test 2
+        const char input2[] = "";
+        const char answer2[] = "";
+
+        k = 1;
+        char *output2 = escape(input2);
+        COMPARATOR(k, output2, answer2);
+
+        ck_assert(1 == k);
+
+        //Test 3
+        const char input3[] = "This\bis\bsome\breally\blong\btext.\nI\breally\blike\those.\nYou\bcan\bdo\bwhatever\byou\bwant\bwith\bthis.\nFor\bexample:\bspam\btabs\t\t\t\t\t\t\t\t";
+        const char answer3[] = "This\\bis\\bsome\\breally\\blong\\btext.\\nI\\breally\\blike\\those.\\nYou\\bcan\\bdo\\bwhatever\\byou\\bwant\\bwith\\bthis.\\nFor\\bexample:\\bspam\\btabs\\t\\t\\t\\t\\t\\t\\t\\t";
+
+        k = 1;
+        char *output3 = escape(input3);
+        COMPARATOR(k, output3, answer3);
+
+        ck_assert(1 == k);
+
+        //Test 4
+        const char input4[] = "Let's test all the escapes, right?\a\b\f\n\r\t\v\\\'\"\?";
+        const char answer4[] = "Let\\\'s test all the escapes, right\\?\\a\\b\\f\\n\\r\\t\\v\\\\\\\'\\\"\\?";
+
+        k = 1;
+        char *output4 = escape(input4);
+        COMPARATOR(k, output4, answer4);
+
+        ck_assert(1 == k);
+
     }
 END_TEST
 

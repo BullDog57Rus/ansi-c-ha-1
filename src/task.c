@@ -337,8 +337,63 @@ char *escape(const char from[]) {
                 to_return[k2++] = '\\';
                 to_return[k2++] = 'n';
                 break;
+            case '\v':
+                j += 2;
+                to_return = realloc(to_return, j*sizeof(char));
+                to_return[k2++] =  '\\';
+                to_return[k2++] =  'v';
+                break;
+            case '\b':
+                j += 2;
+                to_return = realloc(to_return, j*sizeof(char));
+                to_return[k2++] =  '\\';
+                to_return[k2++] =  'b';
+                break;
+            case '\r':
+                j += 2;
+                to_return = realloc(to_return, j*sizeof(char));
+                to_return[k2++] =  '\\';
+                to_return[k2++] =  'r';
+                break;
+            case '\f':
+                j += 2;
+                to_return = realloc(to_return, j*sizeof(char));
+                to_return[k2++] =  '\\';
+                to_return[k2++] =  'f';
+                break;
+            case '\a':
+                j += 2;
+                to_return = realloc(to_return, j*sizeof(char));
+                to_return[k2++] =  '\\';
+                to_return[k2++] =  'a';
+                break;
+            case '\\':
+                j += 2;
+                to_return = realloc(to_return, j*sizeof(char));
+                to_return[k2++] =  '\\';
+                to_return[k2++] =  '\\';
+                break;
+            case '\?':
+                j += 2;
+                to_return = realloc(to_return, j*sizeof(char));
+                to_return[k2++] =  '\\';
+                to_return[k2++] =  '\?';
+                break;
+            case '\'':
+                j += 2;
+                to_return = realloc(to_return, j*sizeof(char));
+                to_return[k2++] =  '\\';
+                to_return[k2++] =  '\'';
+                break;
+            case '\"':
+                j += 2;
+                to_return = realloc(to_return, j*sizeof(char));
+                to_return[k2++] =  '\\';
+                to_return[k2++] =  '\"';
+                break;
             default:
                 to_return[k2++] = from[k1];
+                break;
         }
     }
     to_return[k2] = '\0';
