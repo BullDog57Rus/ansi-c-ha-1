@@ -319,11 +319,18 @@ START_TEST (test_flush)
         res = flush(s0);
         ck_assert_str_eq(answer, res);
 
-//        //Test 3
-//        s0 = "/**/func\n//comment\n/* asdasdasd \nasdasdasd\nasdasd*/yet another function";
-//        answer = "func\nyet another function";
-//        res = flush(s0);
-//        ck_assert_str_eq(answer, res);
+        //Test 3
+        char *s1 = "/**/func\n//comment\n/* asdasdasd \nasdasdasd\nasdasd*/yet another function";
+        answer = "func\nyet another function";
+        res = flush(s1);
+        ck_assert_str_eq(answer, res);
+
+        //Test 4
+        //Test that comments in string is not deleted
+        char s2[] = "//This is normal comment\nchar *bla = \"//however this is not a normal comment\"";
+        answer ="char *bla = \"//however this is not a normal comment\"";
+        res = flush(s2);
+        ck_assert_str_eq(answer, res);
     }
 END_TEST
 
