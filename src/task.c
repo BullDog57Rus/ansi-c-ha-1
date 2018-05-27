@@ -82,7 +82,6 @@ char *entab(const char input[]) {
     char i = 0;
     STRING_LEN(i, input);
     char *to_return = ALLOCATE(i);
-    int j = i;
 
     int k2 = 0;
 
@@ -295,4 +294,22 @@ int strrindex(const char source[], const char target[]) {
         return index;
     }
     return index;
+}
+
+int binsearch(int x, int v[], int n) {
+    int low, high, mid;
+    low = 0, high = n;
+    while (low < high) {
+        mid = (low + high) / 2;
+        if (v[mid] < x) {
+            low = mid + 1;
+        } else {
+            high = mid;
+        }
+    }
+    if ((high < n) && (v[high] == x)) {
+        return high;
+    } else {
+        return -1;
+    }
 }
