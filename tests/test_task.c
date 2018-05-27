@@ -502,10 +502,36 @@ END_TEST
 START_TEST (test_binsearch)
     {
         //Test 0
-        int v[] = {1, 4, 7, 8, 34, 55};
+        int v0[] = {1, 4, 7, 8, 34, 55};
         int x = 7;
         int answer = 2;
-        int res = binsearch(x, v, 6);
+        int res = binsearch(x, v0, 6);
+        ck_assert_int_eq(answer, res);
+
+        //Test 1
+        x = 3;
+        answer = -1;
+        res = binsearch(x, v0, 6);
+        ck_assert_int_eq(answer, res);
+
+        //Test 2
+        int v2[] = {34};
+        x = 7;
+        answer = -1;
+        res = binsearch(x, v2, 1);
+        ck_assert_int_eq(answer, res);
+
+        //Test 3
+        x = 34;
+        answer = 0;
+        res = binsearch(x, v2, 1);
+        ck_assert_int_eq(answer, res);
+
+        //Test 4
+        int v4[] = {};
+        x = 100;
+        answer = -1;
+        res = binsearch(x, v4, 0);
         ck_assert_int_eq(answer, res);
     }
 END_TEST
