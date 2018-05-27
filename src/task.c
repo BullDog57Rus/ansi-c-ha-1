@@ -91,7 +91,7 @@ char *entab(const char input[]) {
     for (int k1 = 0; k1 < i; ++k1) {
         if (input[k1] == ' ') {
             current_spaces++;
-            if (current_spaces == 4) {
+            if (current_spaces == TAB_SIZE) {
                 current_spaces = 0;
                 to_return[k2] = '\t';
                 k2++;
