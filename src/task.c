@@ -114,11 +114,25 @@ char *entab(const char input[]) {
 char *flush(const char input[]) {
     char *output = ALLOCATE(strlen(input));
     int pointer = 0;
-    for (int i = 0; i < strlen(input) - 1; i++) {
+    int curDels = 0;
+    int bound = strlen(input);
+    for (int i = 0; i < bound; i++) {
+        // String literals may contain comments
+        if (input[i] == '"' || input[i] == '\'') {
+            char dash = input[i];
+            output[pointer] = input[i];
+            pointer++;
+            i++;
+            while (input[i - 1] != '\\' && input[i] != dash) {
+                output[pointer] = input[i];
+                pointer++;
+                i++;
+            }
+        }
         if (input[i] == '/') {
             // Remove // comments until next line
             if (input[i + 1] == '/') {
-                int curDels = 1;
+                curDels = 1;
                 for (int j = i + 2; j < strlen(input); j++) {
                     curDels++;
                     if (input[j] == '\n') {
@@ -130,7 +144,7 @@ char *flush(const char input[]) {
 
                 // Remove /* ... */
             else if (input[i + 1] == '*') {
-                int curDels = 0;
+                curDels = 0;
                 for (int j = i; j < strlen(input) - 1; j++) {
                     curDels++;
                     if (input[j] == '*' && input[j + 1] == '/') {
@@ -144,8 +158,8 @@ char *flush(const char input[]) {
             pointer++;
         }
     }
-    char *to = ALLOCATE(pointer + 1);
-    for (int j = 0; j <= pointer; j++) {
+    char *to = ALLOCATE(pointer);
+    for (int j = 0; j < pointer; j++) {
         to[j] = output[j];
     }
     to[pointer] = '\0';
