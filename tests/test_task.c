@@ -69,32 +69,22 @@ START_TEST (test_detab)
         const char input1[] = "abc\ta";
         const char answer1[] = "abc    a";
 
-        int k = 1;
         char *output1 = detab(input1);
-        COMPARATOR(k, output1, answer1);
-
-        ck_assert(1 == k);
+        ck_assert_str_eq(output1, answer1);
 
         //Test 2
         const char input2[] = "abc\t\t\ta";
         const char answer2[] = "abc            a";
 
-        k = 1;
         char *output2 = detab(input2);
-        COMPARATOR(k, output2, answer2);
-
-        ck_assert(1 == k);
-
+        ck_assert_str_eq(output2, answer2);
         //Test 3
 
         const char input3[] = "";
         const char answer3[] = "";
 
-        k = 1;
         char *output3 = detab(input3);
-        COMPARATOR(k, output3, answer3);
-
-        ck_assert(1 == k);
+        ck_assert_str_eq(output3, answer3);
 
         //Test 4
 
@@ -102,44 +92,35 @@ START_TEST (test_detab)
         const char input4[] = "abc";
         const char answer4[] = "abc";
 
-        k = 1;
         char *output4 = detab(input4);
-        COMPARATOR(k, output4, answer4);
-
-        ck_assert(1 == k);
+        ck_assert_str_eq(output4, answer4);
 
         //Test 5
 
         const char input5[] = "\t\t\t\t\t\t";
         const char answer5[] = "                        ";
 
-        k = 1;
         char *output5 = detab(input5);
-        COMPARATOR(k, output5, answer5);
+        ck_assert_str_eq(output5, answer5);
 
-        ck_assert(1 == k);
 
         //Test 6
 
         const char input6[] = "I\tam\tvery\tbored\t";
         const char answer6[] = "I    am    very    bored    ";
 
-        k = 1;
         char *output6 = detab(input6);
-        COMPARATOR(k, output6, answer6);
+        ck_assert_str_eq(output6, answer6);
 
-        ck_assert(1 == k);
 
         //Test 7
 
         const char input7[] = "\tThis is very long sentence.\tIt contains four tabs.\tAnd this is very cool.\t";
         const char answer7[] = "    This is very long sentence.    It contains four tabs.    And this is very cool.    ";
 
-        k = 1;
         char *output7 = detab(input7);
-        COMPARATOR(k, output7, answer7);
+        ck_assert_str_eq(output7, answer7);
 
-        ck_assert(1 == k);
     }
 END_TEST
 
@@ -149,88 +130,71 @@ START_TEST (test_entab)
         const char input1[] = "abc    ";
         const char answer1[] = "abc\t";
 
-        int k = 1;
         char *output1 = entab(input1);
-        COMPARATOR(k, output1, answer1);
-        ck_assert(1 == k);
+        ck_assert_str_eq(output1, answer1);
 
         //Test 2
         const char input2[] = "abc      ";
         const char answer2[] = "abc\t  ";
 
-        k = 1;
         char *output2 = entab(input2);
-        COMPARATOR(k, output2, answer2);
-        ck_assert(1 == k);
+        ck_assert_str_eq(output2, answer2);
+
 
         //Test 3
         const char input3[] = "abc            ";
         const char answer3[] = "abc\t\t\t";
 
-        k = 1;
         char *output3 = entab(input3);
-        COMPARATOR(k, output3, answer3);
 
-        ck_assert(1 == k);
+        ck_assert_str_eq(output3, answer3);
 
         //Test 4
         const char input4[] = "                        ";
         const char answer4[] = "\t\t\t\t\t\t";
 
-        k = 1;
         char *output4 = entab(input4);
-        COMPARATOR(k, output4, answer4);
+        ck_assert_str_eq(output4, answer4);
 
-        ck_assert(1 == k);
 
         //Test 5
         const char input5[] = "";
         const char answer5[] = "";
 
-        k = 1;
         char *output5 = entab(input5);
-        COMPARATOR(k, output5, answer5);
+        ck_assert_str_eq(output5, answer5);
 
-        ck_assert(1 == k);
 
         //Test 6
         const char input6[] = "Wow  this sentece  have    difference  size    of   spaces.";
         const char answer6[] = "Wow  this sentece  have\tdifference  size\tof   spaces.";
 
-        k = 1;
         char *output6 = entab(input6);
-        COMPARATOR(k, output6, answer6);
+        ck_assert_str_eq(output6, answer6);
 
-        ck_assert(1 == k);
 
         //Test 7
         const char input7[] = "What\tabout\ttabs\there???";
         const char answer7[] = "What\tabout\ttabs\there???";
 
-        k = 1;
         char *output7 = entab(input7);
-        COMPARATOR(k, output7, answer7);
+        ck_assert_str_eq(output7, answer7);
 
-        ck_assert(1 == k);
         //Test 8
         const char input8[] = "So      Much   Spaces     Around        Here          .     ";
         const char answer8[] = "So\t  Much   Spaces\t Around\t\tHere\t\t  .\t ";
 
-        k = 1;
         char *output8 = entab(input8);
-        COMPARATOR(k, output8, answer8);
+        ck_assert_str_eq(output8, answer8);
 
-        ck_assert(1 == k);
 
         //Test 9
         const char input9[] = "     |     |      |     |";
         const char answer9[] = "\t |\t |\t  |\t |";
 
-        k = 1;
         char *output9 = entab(input9);
-        COMPARATOR(k, output9, answer9);
+        ck_assert_str_eq(output9, answer9);
 
-        ck_assert(1 == k);
     }
 END_TEST
 
@@ -240,64 +204,55 @@ START_TEST (test_enter)
         const char s0[] = "qwertyuio";
         int n0 = 3;
         const char answer0[] = "qwe\nrty\nuio";
-        int k = 1;
         char *output0 = enter(n0, s0);
-        COMPARATOR(k, output0, answer0);
-        ck_assert(1 == k);
+        ck_assert_str_eq(output0, answer0);
+
 
         //Test 1
         const char s1[] = "dlinnay stroka";
         int n1 = 4;
         const char answer1[] = "dlin\nnay \nstro\nka";
-        k = 1;
         char *output1 = enter(n1, s1);
-        COMPARATOR(k, output1, answer1);
-        ck_assert(1 == k);
+        ck_assert_str_eq(output1, answer1);
 
         //Test 2
         const char s2[] = "1234567890987654321";
         int n2 = 6;
         const char answer2[] = "123456\n789098\n765432\n1";
-        k = 1;
         char *output2 = enter(n2, s2);
-        COMPARATOR(k, output2, answer2);
-        ck_assert(1 == k);
+        ck_assert_str_eq(output2, answer2);
+
 
         //Test 3
         const char s3[] = "Hello, world!!!!!!!!!!!!!!!!!!!";
         int n3 = 6;
         const char answer3[] = "Hello,\n world\n!!!!!!\n!!!!!!\n!!!!!!\n!";
-        k = 1;
         char *output3 = enter(n3, s3);
-        COMPARATOR(k, output3, answer3);
-        ck_assert(1 == k);
+        ck_assert_str_eq(output3, answer3);
+
 
         //Test 4
         const char s4[] = "\tLublu\ttabi\t";
         int n4 = 3;
         const char answer4[] = "\tLu\nblu\n\tta\nbi\t";
-        k = 1;
         char *output4 = enter(n4, s4);
-        COMPARATOR(k, output4, answer4);
-        ck_assert(1 == k);
+        ck_assert_str_eq(output4, answer4);
 
         //Test 5
         const char s5[] = "5 * 5 = 25";
         int n5 = 2;
         const char answer5[] = "5 \n* \n5 \n= \n25";
-        k = 1;
         char *output5 = enter(n5, s5);
-        COMPARATOR(k, output5, answer5);
-        ck_assert(1 == k);
+        ck_assert_str_eq(output5, answer5);
+
 
         //Test 6
         const char s6[] = "QwertAsdfgZxcvb";
         int n6 = 5;
         const char answer6[] = "Qwert\nAsdfg\nZxcvb";
-        k = 1;
         char *output6 = enter(n6, s6);
-        COMPARATOR(k, output6, answer6);
-        ck_assert(1 == k);
+        ck_assert_str_eq(output6, answer6);
+
 
     }
 END_TEST
@@ -390,63 +345,55 @@ START_TEST (test_squeeze)
         char *r0 = "abcd";
         char *answer0 = "rr";
         char *res0 = squeeze(s0, r0);
-        int k = 1;
-        COMPARATOR(k, answer0, res0);
-        ck_assert_int_eq(k, 1);
+        ck_assert_str_eq(answer0, res0);
+
 
         //Test 1
         char *s1 = "I don't give a hack what I am doing";
         char *r1 = " ";
         char *answer1 = "Idon'tgiveahackwhatIamdoing";
         char *res1 = squeeze(s1, r1);
-        k = 1;
-        COMPARATOR(k, answer1, res1);
-        ck_assert_int_eq(k, 1);
+        ck_assert_str_eq(answer1, res1);
+
 
         //Test 2
         char *s2 = "dcba";
         char *r2 = "abcd";
         char *answer2 = "";
         char *res2 = squeeze(s2, r2);
-        k = 1;
-        COMPARATOR(k, answer2, res2);
-        ck_assert_int_eq(k, 1);
+        ck_assert_str_eq(answer2, res2);
 
         //Test 3
         char *s3 = "dbcA";
         char *r3 = "abcd";
         char *answer3 = "A";
         char *res3 = squeeze(s3, r3);
-        k = 1;
-        COMPARATOR(k, answer3, res3);
-        ck_assert_int_eq(k, 1);
+        ck_assert_str_eq(answer3, res3);
+
 
         //Test 4
         char *s4 = "MissIsSiPpi";
         char *r4 = "sp";
         char *answer4 = "MiISiPi";
         char *res4 = squeeze(s4, r4);
-        k = 1;
-        COMPARATOR(k, answer4, res4);
-        ck_assert_int_eq(k, 1);
+        ck_assert_str_eq(answer4, res4);
+
 
         //Test 5
         char *s5 = "Nichego ne pomenyalos'";
         char *r5 = "";
         char *answer5 = "Nichego ne pomenyalos'";
         char *res5 = squeeze(s5, r5);
-        k = 1;
-        COMPARATOR(k, answer5, res5);
-        ck_assert_int_eq(k, 1);
+        ck_assert_str_eq(answer5, res5);
+
 
         //Test 6
         char *s6 = "Udalyau zapyatie, ibo ne nuzhni";
         char *r6 = ",";
         char *answer6 = "Udalyau zapyatie ibo ne nuzhni";
         char *res6 = squeeze(s6, r6);
-        k = 1;
-        COMPARATOR(k, answer6, res6);
-        ck_assert_int_eq(k, 1);
+        ck_assert_str_eq(answer6, res6);
+
     }
 END_TEST
 
@@ -640,41 +587,30 @@ START_TEST (test_escape)
         const char input1[] = "abc\t";
         const char answer1[] = "abc\\t";
 
-        int k = 1;
         char *output1 = escape(input1);
-        COMPARATOR(k, output1, answer1);
-
-        ck_assert(1 == k);
+        ck_assert_str_eq(answer1, output1);
 
         //Test 2
         const char input2[] = "";
         const char answer2[] = "";
 
-        k = 1;
         char *output2 = escape(input2);
-        COMPARATOR(k, output2, answer2);
-
-        ck_assert(1 == k);
+        ck_assert_str_eq(answer2, output2);
 
         //Test 3
         const char input3[] = "This\bis\bsome\breally\blong\btext.\nI\breally\blike\those.\nYou\bcan\bdo\bwhatever\byou\bwant\bwith\bthis.\nFor\bexample:\bspam\btabs\t\t\t\t\t\t\t\t";
         const char answer3[] = "This\\bis\\bsome\\breally\\blong\\btext.\\nI\\breally\\blike\\those.\\nYou\\bcan\\bdo\\bwhatever\\byou\\bwant\\bwith\\bthis.\\nFor\\bexample:\\bspam\\btabs\\t\\t\\t\\t\\t\\t\\t\\t";
 
-        k = 1;
         char *output3 = escape(input3);
-        COMPARATOR(k, output3, answer3);
-
-        ck_assert(1 == k);
+        ck_assert_str_eq(answer3, output3);
 
         //Test 4
         const char input4[] = "Let's test all the escapes, right?\a\b\f\n\r\t\v\\\'\"\?";
         const char answer4[] = "Let\\\'s test all the escapes, right\\?\\a\\b\\f\\n\\r\\t\\v\\\\\\\'\\\"\\?";
 
-        k = 1;
         char *output4 = escape(input4);
-        COMPARATOR(k, output4, answer4);
+        ck_assert_str_eq(answer4, output4);
 
-        ck_assert(1 == k);
 
     }
 END_TEST
@@ -685,57 +621,48 @@ START_TEST (test_expand)
         char s0[] = "a-d";
         char answer0[] = "abcd";
         char *res0 = expand(s0);
-        int k = 1;
-        COMPARATOR(k, answer0, res0);
-        ck_assert_int_eq(k, 1);
+        ck_assert_str_eq(answer0, res0);
+
 
         //Test 1
         char s1[] = "a-d0-9";
         char answer1[] = "abcd0123456789";
         char *res1 = expand(s1);
-        k = 1;
-        COMPARATOR(k, answer1, res1);
-        ck_assert_int_eq(k, 1);
+        ck_assert_str_eq(answer1, res1);
 
         //Test 2
         char s2[] = "-a-d";
         char answer2[] = "-abcd";
         char *res2 = expand(s2);
-        k = 1;
-        COMPARATOR(k, answer2, res2);
-        ck_assert_int_eq(k, 1);
+        ck_assert_str_eq(answer2, res2);
 
         //Test 3
         char s3[] = "-a-d-";
         char answer3[] = "-abcd-";
         char *res3 = expand(s3);
-        k = 1;
-        COMPARATOR(k, answer3, res3);
-        ck_assert_int_eq(k, 1);
+        ck_assert_str_eq(answer3, res3);
 
         //Test 4
         char s4[] = "a-d-e";
         char answer4[] = "abcde";
         char *res4 = expand(s4);
-        k = 1;
-        COMPARATOR(k, answer4, res4);
-        ck_assert_int_eq(k, 1);
+        ck_assert_str_eq(answer4, res4);
+
 
         //Test 5
         char s5[] = "";
         char answer5[] = "";
         char *res5 = expand(s5);
-        k = 1;
-        COMPARATOR(k, answer5, res5);
-        ck_assert_int_eq(k, 1);
+        ck_assert_str_eq(answer5, res5);
+
 
         //Test 6
         char s6[] = "a-z0-c";
         char answer6[] = "abcdefghijklmnopqrstuvwxyz0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abc";
         char *res6 = expand(s6);
-        k = 1;
-        COMPARATOR(k, answer6, res6);
-        ck_assert_int_eq(k, 1);
+        ck_assert_str_eq(answer6, res6);
+
+
     }
 END_TEST
 
@@ -774,63 +701,55 @@ START_TEST (test_itob)
         int b = 16;
         char *answer0 = "64";
         char *res0 = itob(n, b);
-        int k = 1;
-        COMPARATOR(k, answer0, res0);
-        ck_assert(1 == k);
+        ck_assert_str_eq(answer0, res0);
+
 
         //Test 1
         n = 12453;
         b = 8;
         char *answer1 = "30245";
         char *res1 = itob(n, b);
-        k = 1;
-        COMPARATOR(k, answer1, res1);
-        ck_assert(1 == k);
+        ck_assert_str_eq(answer1, res1);
 
         //Test 2
         n = 234;
         b = 5;
         char *answer2 = "1414";
         char *res2 = itob(n, b);
-        k = 1;
-        COMPARATOR(k, answer2, res2);
-        ck_assert(1 == k);
+        ck_assert_str_eq(answer2, res2);
+
 
         //Test 3
         n = 890;
         b = 12;
         char *answer3 = "622";
         char *res3 = itob(n, b);
-        k = 1;
-        COMPARATOR(k, answer3, res3);
-        ck_assert(1 == k);
+        ck_assert_str_eq(answer3, res3);
+
 
         //Test 4
         n = -5;
         b = 2;
         char *answer4 = "-101";
         char *res4 = itob(n, b);
-        k = 1;
-        COMPARATOR(k, answer4, res4);
-        ck_assert(1 == k);
+        ck_assert_str_eq(answer4, res4);
+
 
         //Test 5
         n = 15;
         b = -1;
         char *answer5 = "Base must be > 1";
         char *res5 = itob(n, b);
-        k = 1;
-        COMPARATOR(k, answer5, res5);
-        ck_assert(1 == k);
+        ck_assert_str_eq(answer5, res5);
+
 
         //Test 6
         n = 300000000;
         b = 2;
         char *answer6 = "10001111000011010001100000000";
         char *res6 = itob(n, b);
-        k = 1;
-        COMPARATOR(k, answer6, res6);
-        ck_assert(1 == k);
+        ck_assert_str_eq(answer6, res6);
+
 
     }
 END_TEST
