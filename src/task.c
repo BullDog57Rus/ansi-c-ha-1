@@ -239,7 +239,7 @@ char *itob(int n, int b) {
         return "Base must be > 1";
     }
     int i, j, sign;
-    char *output = ALLOCATE(100);
+    char *output = ALLOCATE(1);
     if ((sign = n) < 0)
         n = -n;
     i = 0;
