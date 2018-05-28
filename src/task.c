@@ -115,7 +115,8 @@ char *flush(const char input[]) {
     char *output = ALLOCATE(strlen(input));
     int pointer = 0;
     int curDels = 0;
-    int bound = strlen(input);
+    int bound = 0;
+    STRING_LEN(bound, input);
     for (int i = 0; i < bound; i++) {
         // String literals may contain comments
         if (input[i] == '"' || input[i] == '\'') {
@@ -167,7 +168,8 @@ char *flush(const char input[]) {
 }
 
 char *enter(int n, const char input[]) {
-    int length = strlen(input);
+    int length = 0;
+    STRING_LEN(length, input);
     int count = 0;
     char *output = ALLOCATE(length + log2(length) + 1);
     if (length > n) {
@@ -253,17 +255,18 @@ char *itob(int n, int b) {
         return "Base must be > 1";
     }
     int i, j, sign;
-    char *output = ALLOCATE(100);
+    char *output = ALLOCATE(1);
     if ((sign = n) < 0)
         n = -n;
     i = 0;
     do {
         j = n % b;
         if (j < 10) {
-            output[i++] = j + '0';
+            output[i++] = (char) (j + '0');
         } else {
-            output[i++] = j + 'a' - 10;
+            output[i++] = (char) (j + 'a' - 10);
         }
+        output = realloc(output, sizeof(char) * (i + 1));
     } while ((n /= b) > 0);
 
     if (sign < 0)
@@ -271,8 +274,10 @@ char *itob(int n, int b) {
     output[i] = '\0';
 
     //reverse
-    int c, k, l;
-    for (k = 0, l = strlen(output) - 1; k < l; k++, l--) {
+    int k, l = 0;
+    char c;
+    STRING_LEN(l, output);
+    for (k = 0, l--; k < l; k++, l--) {
         c = output[k];
         output[k] = output[l];
         output[l] = c;
@@ -281,8 +286,11 @@ char *itob(int n, int b) {
 }
 
 int strrindex(const char source[], const char target[]) {
-    int s_len = strlen(source);
-    int t_len = strlen(target);
+
+    int s_len = 0;
+    int t_len = 0;
+    STRING_LEN(s_len, source);
+    STRING_LEN(t_len, target);
     int index = -1;
     for (int i = s_len - t_len + 1; i >= 0; i--) {
         if (source[i] == target[0]) {

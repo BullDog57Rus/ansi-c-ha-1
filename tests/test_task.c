@@ -286,7 +286,7 @@ START_TEST (test_flush)
         //Test 4
         //Test that comments in string is not deleted
         char s2[] = "//This is normal comment\nchar *bla = \"//however this is not a normal comment\"";
-        answer ="char *bla = \"//however this is not a normal comment\"";
+        answer = "char *bla = \"//however this is not a normal comment\"";
         res = flush(s2);
         ck_assert_str_eq(answer, res);
     }
@@ -703,7 +703,6 @@ START_TEST (test_itob)
         char *res0 = itob(n, b);
         ck_assert_str_eq(answer0, res0);
 
-
         //Test 1
         n = 12453;
         b = 8;
@@ -718,14 +717,12 @@ START_TEST (test_itob)
         char *res2 = itob(n, b);
         ck_assert_str_eq(answer2, res2);
 
-
         //Test 3
         n = 890;
         b = 12;
         char *answer3 = "622";
         char *res3 = itob(n, b);
         ck_assert_str_eq(answer3, res3);
-
 
         //Test 4
         n = -5;
@@ -734,7 +731,6 @@ START_TEST (test_itob)
         char *res4 = itob(n, b);
         ck_assert_str_eq(answer4, res4);
 
-
         //Test 5
         n = 15;
         b = -1;
@@ -742,14 +738,12 @@ START_TEST (test_itob)
         char *res5 = itob(n, b);
         ck_assert_str_eq(answer5, res5);
 
-
         //Test 6
         n = 300000000;
         b = 2;
         char *answer6 = "10001111000011010001100000000";
         char *res6 = itob(n, b);
         ck_assert_str_eq(answer6, res6);
-
 
     }
 END_TEST
