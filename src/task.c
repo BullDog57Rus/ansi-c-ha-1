@@ -106,6 +106,11 @@ char *entab(const char input[]) {
             k2++;
         }
     }
+    while (current_spaces > 0) {
+        to_return[k2] = ' ';
+        k2++;
+        current_spaces--;
+    }
 
     to_return[k2] = '\0';
     return to_return;
