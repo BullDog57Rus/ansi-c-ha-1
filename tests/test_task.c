@@ -9,16 +9,16 @@
 #define TOL_STRICT 1e-9
 
 #ifndef COMPARATOR
-#define COMPARATOR(res, c1, c2) do                    \
-    {                                             \
-        int i = 0;                           \
-        for (;'\0' != (c1)[i];i++)            \
-        {                                     \
-            if((c1)[i] != (c2)[i])        \
-                {                     \
-                                        (res) = 0;    \
-                }                     \
-        }                                     \
+#define COMPARATOR(res, c1, c2) do                  \
+    {                                               \
+        int i = 0;                                  \
+        for (;'\0' != (c1)[i];i++)                  \
+        {                                           \
+            if((c1)[i] != (c2)[i])                  \
+                {                                   \
+                    (res) = 0;                      \
+                }                                   \
+        }                                           \
     } while(0)
 #endif
 
@@ -277,17 +277,17 @@ START_TEST (test_flush)
         res = flush(s0);
         ck_assert_str_eq(answer, res);
 
-//        //Test 3
-//        char *s1 = "/**/func\n//comment\n/* asdasdasd \nasdasdasd\nasdasd*/yet another function";
-//        answer = "func\nyet another function";
-//        res = flush(s1);
-//        ck_assert_str_eq(answer, res);
-//
-//        //Test 4
-//        //Test that comments in string is not deleted
-//        char s2[] = "//This is normal comment\nchar *bla = \"//however this is not a normal comment\"";
-//        answer ="char *bla = \"//however this is not a normal comment\"";
-//        res = flush(s2);
+        //Test 3
+        char *s1 = "/**/func\n//comment\n/* asdasdasd \nasdasdasd\nasdasd*/yet another function";
+        answer = "func\nyet another function";
+        res = flush(s1);
+        ck_assert_str_eq(answer, res);
+
+        //Test 4
+        //Test that comments in string is not deleted
+        char s2[] = "//This is normal comment\nchar *bla = \"//however this is not a normal comment\"";
+        answer ="char *bla = \"//however this is not a normal comment\"";
+        res = flush(s2);
         ck_assert_str_eq(answer, res);
     }
 END_TEST
